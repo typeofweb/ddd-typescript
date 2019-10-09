@@ -1,0 +1,20 @@
+{
+  "name": "2019-10-ddd-typescript",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Michał Miszczyszyn <michal@mmiszy.pl> (https://typeofweb.com/)",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/bcrypt-nodejs": "0.0.30",
+    "@types/node": "12.7.12",
+    "typescript": "3.6.3"
+  },
+  "dependencies": {
+    "bcrypt-nodejs": "0.0.3"
+  }
+}
