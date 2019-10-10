@@ -1,6 +1,6 @@
-import { User } from "./user";
+import { User } from './user';
 
 export type UserCreatedEvent = {
-  type: "USER_CREATED";
+  type: 'USER_CREATED';
   value: User;
 };

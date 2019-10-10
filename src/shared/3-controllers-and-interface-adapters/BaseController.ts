@@ -10,12 +10,12 @@ export interface Response<T = unknown> {
 class HTTPError extends Error {
   constructor(message?: string, public status: number = 500) {
     super(message);
-    this.name = "HTTPError";
+    this.name = 'HTTPError';
   }
 }
 
 export type BaseController<ResponseType = unknown, RequestType = unknown> = (
-  req: Request<RequestType>
+  req: Request<RequestType>,
 ) => Promise<Response<ResponseType>>;
 
 export function conflict(message?: string): never {
@@ -30,6 +30,6 @@ export function ok<T>(response: T): Response<T>;
 export function ok(response: unknown | null): Response {
   return {
     status: 200,
-    body: response
+    body: response,
   };
 }

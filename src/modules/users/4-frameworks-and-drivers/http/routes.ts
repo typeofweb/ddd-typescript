@@ -1,11 +1,11 @@
-import express from "express";
-import { createUserController } from "@modules/users/2-use-cases/createUser";
-import { listUsersController } from "@modules/users/2-use-cases/listUsers";
-import { postUserValidator } from "./validators";
+import express from 'express';
+import { listUsersController } from '@modules/users/2-use-cases/listUsers';
+import { postUserValidator } from './validators';
+import { createUserController } from '../index';
 
 export const userRouter = express.Router();
 
-userRouter.post("/", async (req, res) => {
+userRouter.post('/', async (req, res) => {
   try {
     const validatedReq = postUserValidator.validate(req);
 
@@ -25,7 +25,7 @@ userRouter.post("/", async (req, res) => {
   }
 });
 
-userRouter.get("/", async (req, res) => {
+userRouter.get('/', async (req, res) => {
   try {
     const response = await listUsersController(req);
     return res.status(response.status).json(response.body);

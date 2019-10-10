@@ -2,10 +2,10 @@
   "name": "2019-10-ddd-typescript",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "scripts": {
     "dev": "ts-node-dev -r tsconfig-paths/register src/index.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "eslint src/**/*.ts --fix",
+    "test": "eslint src/**/*.ts --fix && jest"
   },
   "keywords": [],
   "author": "Michał Miszczyszyn <michal@mmiszy.pl> (https://typeofweb.com/)",
@@ -14,33 +14,26 @@
     "@types/body-parser": "1.17.1",
     "@types/express": "4.17.1",
     "@types/hapi__hapi": "18.2.5",
+    "@types/jest": "24.0.18",
     "@types/node": "12.7.12",
-    "@typescript-eslint/eslint-plugin": "2.3.3",
-    "@typescript-eslint/parser": "2.3.3",
+    "@typescript-eslint/eslint-plugin": "2.3.4-alpha.0",
+    "@typescript-eslint/parser": "2.3.4-alpha.0",
     "eslint": "6.5.1",
     "eslint-config-prettier": "6.4.0",
     "eslint-plugin-prettier": "3.1.1",
     "husky": "3.0.8",
+    "jest": "24.9.0",
     "lint-staged": "10.0.0-0",
     "prettier": "1.18.2",
+    "ts-jest": "24.1.0",
     "tsconfig-paths": "3.9.0",
-    "typescript": "3.6.3"
+    "typescript": "3.7.0-beta"
   },
   "dependencies": {
     "@hapi/hapi": "18.4.0",
     "body-parser": "1.19.0",
+    "event-emitter3": "1.0.4",
     "express": "4.17.1",
     "typesafe-joi": "2.0.6"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "*.ts": [
-      "eslint --fix",
-      "git add"
-    ]
   }
 }

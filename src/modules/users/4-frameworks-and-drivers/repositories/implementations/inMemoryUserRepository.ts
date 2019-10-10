@@ -1,13 +1,13 @@
-import { User } from "@modules/users/1-domain-and-entities/user";
+import { User } from '@modules/users/1-domain-and-entities/user';
 import {
   userToPersistence,
-  userToDomain
-} from "@modules/users/3-interface-adapters/UserMapper";
-import { userEmailToString } from "@modules/users/1-domain-and-entities/userEmail";
+  userToDomain,
+} from '@modules/users/3-controllers-and-interface-adapters/UserMapper';
+import { userEmailToString } from '@modules/users/1-domain-and-entities/userEmail';
 import {
   UserRepository,
-  RawUser
-} from "@modules/users/4-frameworks-and-drivers/repositories/userRepository";
+  RawUser,
+} from '@modules/users/4-frameworks-and-drivers/repositories/userRepository';
 
 const users: RawUser[] = [];
 
@@ -24,5 +24,5 @@ export const inMemoryUserRepository: UserRepository = {
 
   async getAllUsers(): Promise<User[]> {
     return users.map(userToDomain);
-  }
+  },
 };

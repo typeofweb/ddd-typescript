@@ -1,37 +1,22 @@
-import { UserEmail } from "./userEmail";
-import { UserRole } from "./userRole";
-import * as Either from "@shared/types/either";
-import * as AggregateRoot from "@shared/1-domain-and-entities/aggregateRoot";
-import { UserCreatedEvent } from "./userEvents";
+import { UserEmail } from './userEmail';
+import { UserRole } from './userRole';
+import * as Either from '@shared/types/either';
+import * as DomainEvents from '@shared/1-domain-and-entities/domainEvents';
+import { UserCreatedEvent } from './userEvents';
 
-type UserProps = {
+export type UserProps = {
   email: UserEmail;
   role: UserRole;
 };
 
 export class User implements UserProps {
-  constructor(
-    public readonly email: UserEmail,
-    public readonly role: UserRole
-  ) {}
+  constructor(public readonly email: UserEmail, public readonly role: UserRole) {}
 }
 
 export function createUser(props: UserProps): Either.Either<Error, User> {
-  if (!props.email) {
-    return Either.makeLeft(new Error("Missing email!"));
-  }
-
-  if (!props.role) {
-    return Either.makeLeft(new Error("Missing role!"));
-  }
-
   const user = new User(props.email, props.role);
 
-  const event: UserCreatedEvent = {
-    type: "USER_CREATED",
-    value: user
-  };
-  AggregateRoot.addDomainEvent(event);
+  DomainEvents.addDomainEvent<UserCreatedEvent>('USER_CREATED', user);
 
   return Either.makeRight(user);
 }
