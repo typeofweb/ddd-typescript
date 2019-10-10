@@ -1,7 +1,6 @@
 import { UserEmail } from "./userEmail";
 import { UserRole } from "./userRole";
-import { Either } from "@shared/types/either";
-import { makeLeft, makeRight } from "../../../shared/types/either";
+import * as Either from "@shared/types/either";
 import * as AggregateRoot from "@shared/1-domain-and-entities/aggregateRoot";
 import { UserCreatedEvent } from "./userEvents";
 
@@ -17,22 +16,22 @@ export class User implements UserProps {
   ) {}
 }
 
-export function createUser(props: UserProps): Either<Error, User> {
+export function createUser(props: UserProps): Either.Either<Error, User> {
   if (!props.email) {
-    return makeLeft(new Error("Missing email!"));
+    return Either.makeLeft(new Error("Missing email!"));
   }
 
   if (!props.role) {
-    return makeLeft(new Error("Missing role!"));
+    return Either.makeLeft(new Error("Missing role!"));
   }
 
   const user = new User(props.email, props.role);
-  
+
   const event: UserCreatedEvent = {
-    type: 'USER_CREATED',
+    type: "USER_CREATED",
     value: user
-  }
+  };
   AggregateRoot.addDomainEvent(event);
 
-  return makeRight(user);
+  return Either.makeRight(user);
 }

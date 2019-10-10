@@ -1,14 +1,10 @@
-import { User, createUser } from "../../1-domain-and-entities/user";
-import {
-  stringToUserEmail,
-  UserEmail
-} from "../../1-domain-and-entities/userEmail";
-import { stringToUserRole } from "../../1-domain-and-entities/userRole";
+import { createUser } from "@modules/users/1-domain-and-entities/user";
+import { stringToUserEmail } from "@modules/users/1-domain-and-entities/userEmail";
+import { stringToUserRole } from "@modules/users/1-domain-and-entities/userRole";
 import * as Either from "@shared/types/either";
 import { EmailAlreadyExistsError } from "./createUserErrors";
-import { isLeft } from '../../../../shared/types/either';
 import { CreateUserRequestDTO, CreateUserResponseDTO } from "./createUserDTOs";
-import { UserRepository } from '../../4-frameworks-and-drivers/repositories/userRepository';
+import { UserRepository } from "@modules/users/4-frameworks-and-drivers/repositories/userRepository";
 
 export const CreateUserUseCase = (userRepository: UserRepository) => async (
   request: CreateUserRequestDTO
@@ -24,7 +20,7 @@ export const CreateUserUseCase = (userRepository: UserRepository) => async (
     return roleOrError;
   }
 
-  const userExists = userRepository.existsByEmail(emailOrError.value);
+  const userExists = await userRepository.existsByEmail(emailOrError.value);
 
   if (userExists) {
     return Either.makeLeft(new EmailAlreadyExistsError(emailOrError.value));
@@ -32,10 +28,10 @@ export const CreateUserUseCase = (userRepository: UserRepository) => async (
 
   const userOrError = createUser({
     email: emailOrError.value,
-    role: roleOrError.value,
+    role: roleOrError.value
   });
 
-  if (isLeft(userOrError)) {
+  if (Either.isLeft(userOrError)) {
     return userOrError;
   }
 

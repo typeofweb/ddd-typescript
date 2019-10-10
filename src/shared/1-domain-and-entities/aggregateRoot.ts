@@ -1,4 +1,4 @@
-export function addDomainEvent<EventName extends string, Value>(event: {
+export function addDomainEvent<EventName extends string, Value>(_event: {
   type: EventName;
   value: Value;
 }): void {

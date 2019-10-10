@@ -13,11 +13,11 @@ export const makeRight = <L, R>(r: R): Either<L, R> => {
   return { [eitherBrand]: "right", value: r };
 };
 
-export function isLeft<L, R>(value: Either<L, R>): value is Left<L, R>  {
+export function isLeft<L, R>(value: Either<L, R>): value is Left<L, R> {
   return value[eitherBrand] === "left";
 }
 
-export function isRight<L, R>(value: Either<L, R>): value is Right<L, R>  {
+export function isRight<L, R>(value: Either<L, R>): value is Right<L, R> {
   return value[eitherBrand] === "right";
 }
 

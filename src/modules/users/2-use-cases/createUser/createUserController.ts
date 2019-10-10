@@ -1,15 +1,17 @@
-import { CreateUserUseCase } from './createUserUseCase'
-import { CreateUserResponseDTO, CreateUserRequestDTO } from './createUserDTOs';
-import * as Either from '../../../../shared/types/either';
-import * as BaseController from '@shared/4-frameworks-and-drivers/BaseController';
-import { EmailAlreadyExistsError } from './createUserErrors';
+import { CreateUserUseCase } from "./createUserUseCase";
+import { CreateUserRequestDTO } from "./createUserDTOs";
+import * as BaseController from "@shared/4-frameworks-and-drivers/BaseController";
+import { EmailAlreadyExistsError } from "./createUserErrors";
+import * as Either from "@shared/types/either";
 
-export const CreateUserController = (createUserUseCase: ReturnType<typeof CreateUserUseCase>): BaseController.BaseController => async (req) => {
-  const dto: CreateUserRequestDTO = req.body;
+export const CreateUserController = (
+  createUserUseCase: ReturnType<typeof CreateUserUseCase>
+): BaseController.BaseController<null, CreateUserRequestDTO> => async req => {
+  const dto = req.body;
 
   const result = await createUserUseCase({
-    email: dto.email,
-  })
+    email: dto.email
+  });
 
   if (Either.isLeft(result)) {
     if (result.value instanceof EmailAlreadyExistsError) {
@@ -18,6 +20,6 @@ export const CreateUserController = (createUserUseCase: ReturnType<typeof Create
       return BaseController.internal();
     }
   }
-  
+
   return BaseController.ok(result.value);
-}
+};

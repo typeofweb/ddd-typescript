@@ -4,17 +4,43 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "dev": "ts-node-dev -r tsconfig-paths/register src/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "Michał Miszczyszyn <michal@mmiszy.pl> (https://typeofweb.com/)",
   "license": "ISC",
   "devDependencies": {
-    "@types/bcrypt-nodejs": "0.0.30",
+    "@types/body-parser": "1.17.1",
+    "@types/express": "4.17.1",
+    "@types/hapi__hapi": "18.2.5",
     "@types/node": "12.7.12",
+    "@typescript-eslint/eslint-plugin": "2.3.3",
+    "@typescript-eslint/parser": "2.3.3",
+    "eslint": "6.5.1",
+    "eslint-config-prettier": "6.4.0",
+    "eslint-plugin-prettier": "3.1.1",
+    "husky": "3.0.8",
+    "lint-staged": "10.0.0-0",
+    "prettier": "1.18.2",
+    "tsconfig-paths": "3.9.0",
     "typescript": "3.6.3"
   },
   "dependencies": {
-    "bcrypt-nodejs": "0.0.3"
+    "@hapi/hapi": "18.4.0",
+    "body-parser": "1.19.0",
+    "express": "4.17.1",
+    "typesafe-joi": "2.0.6"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.ts": [
+      "eslint --fix",
+      "git add"
+    ]
   }
 }
