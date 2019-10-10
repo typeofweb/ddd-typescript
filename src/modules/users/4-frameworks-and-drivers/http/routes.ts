@@ -1,7 +1,6 @@
 import express from 'express';
-import { listUsersController } from '@modules/users/2-use-cases/listUsers';
 import { postUserValidator } from './validators';
-import { createUserController } from '../index';
+import { createUserController, listUsersController } from '../index';
 
 export const userRouter = express.Router();
 
