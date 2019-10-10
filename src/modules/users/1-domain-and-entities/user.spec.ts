@@ -1,6 +1,6 @@
-import * as DomainEvents from '@shared/1-domain-and-entities/domainEvents';
+import * as DomainEvents from '@shared/1-domain-and-entities/DomainEvents';
 import { UserCreatedEvent } from './userEvents';
-import { createUser } from './user';
+import { createUser, User } from './user';
 import * as UserEmail from './userEmail';
 import * as UserRole from './userRole';
 import * as Either from '@shared/types/either';
@@ -20,6 +20,8 @@ describe('User', () => {
         email: email.value,
         role: role.value,
       });
+
+      DomainEvents.dispatchEventsForAggregate(User);
 
       expect(mock).toHaveBeenCalledTimes(1);
       expect(mock).toHaveBeenCalledWith('USER_CREATED', user.value);

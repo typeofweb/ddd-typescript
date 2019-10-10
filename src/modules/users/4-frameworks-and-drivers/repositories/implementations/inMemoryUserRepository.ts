@@ -4,6 +4,7 @@ import {
   userToDomain,
 } from '@modules/users/3-controllers-and-interface-adapters/UserMapper';
 import { userEmailToString } from '@modules/users/1-domain-and-entities/userEmail';
+import * as DomainEvents from '@shared/1-domain-and-entities/DomainEvents';
 import {
   UserRepository,
   RawUser,
@@ -20,6 +21,8 @@ export const inMemoryUserRepository: UserRepository = {
   async save(user): Promise<void> {
     const userToSave = userToPersistence(user);
     users.push(userToSave);
+
+    DomainEvents.dispatchEventsForAggregate(User);
   },
 
   async getAllUsers(): Promise<User[]> {

@@ -1,7 +1,7 @@
 import { UserEmail } from './userEmail';
 import { UserRole } from './userRole';
 import * as Either from '@shared/types/either';
-import * as DomainEvents from '@shared/1-domain-and-entities/domainEvents';
+import * as DomainEvents from '@shared/1-domain-and-entities/DomainEvents';
 import { UserCreatedEvent } from './userEvents';
 
 export type UserProps = {
@@ -16,7 +16,7 @@ export class User implements UserProps {
 export function createUser(props: UserProps): Either.Either<Error, User> {
   const user = new User(props.email, props.role);
 
-  DomainEvents.addDomainEvent<UserCreatedEvent>('USER_CREATED', user);
+  DomainEvents.addDomainEvent<UserCreatedEvent>(User, 'USER_CREATED', user);
 
   return Either.makeRight(user);
 }
