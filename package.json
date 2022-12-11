@@ -33,7 +33,7 @@
     "@hapi/hapi": "18.4.0",
     "body-parser": "1.19.0",
     "event-emitter3": "1.0.4",
-    "express": "4.17.1",
+    "express": "4.17.3",
     "typesafe-joi": "2.0.6"
   }
 }
