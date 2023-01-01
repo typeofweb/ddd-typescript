@@ -26,7 +26,7 @@
     "lint-staged": "10.0.0-0",
     "prettier": "1.18.2",
     "ts-jest": "24.1.0",
-    "tsconfig-paths": "3.9.0",
+    "tsconfig-paths": "3.10.1",
     "typescript": "3.7.0-beta"
   },
   "dependencies": {
